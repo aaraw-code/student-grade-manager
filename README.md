@@ -40,15 +40,20 @@ while True:
         students[name] = student(name)
         print("student added.")
 
+    
     if choice == "2":
         name = input("Enter student name: ")
         if name in students:
-            count = int(input("How many subjects do you want to add: "))
-            for i in range(count):
-                subject = input(f"Enter subject name {i+1}: ")
-                grade = float(input(f"Enter grade {subject}: "))
-                students[name].add_grade(subject,grade)
-                print(" All Grade added succesfully.")
+            while True:
+                subject = input("Enter subject name (or type 'done' to finish: )")
+                if subject.lower() == "done":
+                    break
+                try:
+                    grade = float(f"Enter grade for {subject}: ")
+                    students[name].add_grade(subject,grade)
+                except ValueError:
+                    print("Invalid grade. Please enter a number.")
+            print("All grades added succesfully")
         else:
             print("Student not found")
 
